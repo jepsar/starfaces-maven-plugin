@@ -1,0 +1,1 @@
+# starfaces-maven-plugin
