@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Copyright (c) Jasper de Vries.
+<#if licenseLast??>
+${licenseLast}
+</#if>
