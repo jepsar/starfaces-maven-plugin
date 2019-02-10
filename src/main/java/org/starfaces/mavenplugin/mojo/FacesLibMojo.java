@@ -99,7 +99,8 @@ abstract class FacesLibMojo extends AbstractMojo {
    */
   private Stream<Class<?>> loadClasses(ClassLoader classLoader) {
     try {
-      return Utils.classNames(getBuildDirClassesPath(), 100).map(c -> loadClass(classLoader, c));
+      return Utils.classNames(getBuildDirClassesPath(), 100)
+              .map(c -> loadClass(classLoader, c));
     }
     catch (IOException ex) {
       throw new IllegalStateException(ex);
@@ -132,7 +133,9 @@ abstract class FacesLibMojo extends AbstractMojo {
    * @return Stream of {@link UIComponent} classes.
    */
   private Stream<Class<UIComponent>> loadComponents(ClassLoader classLoader) {
-    return loadClasses(classLoader).filter(this::isFacesComponent).map(this::toUIComponentClass);
+    return loadClasses(classLoader)
+            .filter(this::isFacesComponent)
+            .map(this::toUIComponentClass);
   }
 
   /**
