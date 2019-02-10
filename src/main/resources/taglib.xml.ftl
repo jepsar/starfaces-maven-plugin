@@ -5,9 +5,9 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_3.xsd"
   version="2.3">
 
-  <description>SemanticFaces components</description>
-  <namespace>http://semanticfaces.org/components</namespace>
-  <short-name>s</short-name>
+  <description>${pluginConfig.getChild('description').value}</description>
+  <namespace>${pluginConfig.getChild('namespace').value}</namespace>
+  <short-name>${pluginConfig.getChild('shortName').value}</short-name>
   <#list components as component>
 
   <tag>

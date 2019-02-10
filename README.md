@@ -23,6 +23,11 @@ Add this plugin to the build plugins section:
   <groupId>com.github.jepsar</groupId>
   <artifactId>starfaces-maven-plugin</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <configuration>
+    <description>Your description</description>
+    <namespace>Your namespace</namespace>
+    <shortName>Your short name</shortName>
+  </configuration>
   <executions>
     <execution>
       <phase>process-classes</phase>

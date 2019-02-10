@@ -20,8 +20,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
+import org.apache.maven.model.Plugin;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.util.xml.Xpp3Dom;
 import org.starfaces.mavenplugin.model.FacesLib;
 import org.starfaces.mavenplugin.util.Utils;
 
@@ -30,6 +32,11 @@ import org.starfaces.mavenplugin.util.Utils;
  * @author Jasper de Vries &lt;jepsar@gmail.com&gt;
  */
 abstract class FacesLibMojo extends AbstractMojo {
+
+  /**
+   * This plugin's artifact ID.
+   */
+  private static final String ARTIFACT_ID = "starfaces-maven-plugin";
 
   /**
    * Faces library model.
@@ -66,6 +73,19 @@ abstract class FacesLibMojo extends AbstractMojo {
    */
   protected Path getBuildDirClassesPath() {
     return Paths.get(getProject().getBuild().getDirectory(), "classes");
+  }
+
+  /**
+   * Returns this plugin's configuration object.
+   * 
+   * @return This plugin's configuration object.
+   */
+  protected Xpp3Dom getConfiguration() {
+    return (Xpp3Dom) getProject().getBuild().getPlugins().stream()
+            .filter(p -> ARTIFACT_ID.equals(p.getArtifactId()))
+            .map(Plugin::getConfiguration)
+            .findFirst()
+            .get();
   }
 
   /**
@@ -211,7 +231,7 @@ abstract class FacesLibMojo extends AbstractMojo {
    */
   public FacesLib getFacesLib() {
     if (facesLib == null) {
-      facesLib = new FacesLib(getClassLoader());
+      facesLib = new FacesLib(getClassLoader(), getConfiguration());
       loadComponents(facesLib.getClassLoader()).forEach(facesLib::addComponent);
       facesLib.sortComponents();
     }

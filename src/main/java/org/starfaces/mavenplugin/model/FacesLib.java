@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.faces.component.UIComponent;
+import org.codehaus.plexus.util.xml.Xpp3Dom;
 
 /**
  *
@@ -20,17 +21,24 @@ public class FacesLib {
   private final ClassLoader classLoader;
 
   /**
+   * Plugin configuration.
+   */
+  private final Xpp3Dom pluginConfig;
+
+  /**
    * Library components.
    */
   private final List<LibComponent> components = new ArrayList<>();
 
   /**
-   * Constructs with class loader.
+   * Constructs with class loader and plugin configuration.
    *
-   * @param classLoader Sets {@link #classLoader}.
+   * @param classLoader  Sets {@link #classLoader}.
+   * @param pluginConfig Sets {@link #pluginConfig}.
    */
-  public FacesLib(ClassLoader classLoader) {
+  public FacesLib(ClassLoader classLoader, Xpp3Dom pluginConfig) {
     this.classLoader = classLoader;
+    this.pluginConfig = pluginConfig;
   }
 
   /**
@@ -56,6 +64,15 @@ public class FacesLib {
    */
   public ClassLoader getClassLoader() {
     return classLoader;
+  }
+
+  /**
+   * Returns {@link #pluginConfig}.
+   *
+   * @return {@link #pluginConfig}.
+   */
+  public Xpp3Dom getPluginConfig() {
+    return pluginConfig;
   }
 
   /**
