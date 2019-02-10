@@ -15,12 +15,14 @@
     <component>
       <component-type>${component.type}</component-type>
     </component>
+    <#list component.attributes as attribute>
     <attribute>
-      <description><![CDATA[Value of the component.]]></description>
-      <name>value</name>
-      <required>false</required>
-      <type>java.lang.Object</type>
-    </attribute>    
+      <description><![CDATA[${attribute.description}]]></description>
+      <name>${attribute.name}</name>
+      <required>${attribute.required?c}</required>
+      <type>${attribute.type}</type>
+    </attribute>
+    </#list>
   </tag>
   </#list>
 
